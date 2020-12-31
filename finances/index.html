@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>Investments</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Collapsible sidebar using Bootstrap 4</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div>
+          <h2>
+            <center>Investment Strategy</center>
+          </h2>
+          <p class="header-info">Our investment strategy is to find stable, high yielding Canadian companies that have a strong financial foundation while also giving good capital gains. This is a moderate
+		  approach that combines the stability of bonds with the growth of publicly owned companies. In most cases, a private company is owned by the company's founders, management, or a group of private investors.
+		  A public company is a company that has sold all or a portion of itself to the public via an initial public offering.</p>
+    </div>
+    <div class="wrapper">
+
+        <!-- Sidebar -->
+        <nav id="sidebar" class="flex-column">
+  
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#" onclick="SetContent('Summary')">Summary</a>
+                </li>
+                <li>
+                    <a href="#lectureSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Knowledge Base</a>
+                    <ul class="collapse list-unstyled" id="lectureSubmenu">
+                        <li>
+                            <a href="#" onclick="SetContent('Page1')">Introduction</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page2')">Bonds</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page3')">High Growth Stocks</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page4')">Dividend Yielding Stocks</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page5')">The Dividend Per Share</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page6')">The Earnings Per Share</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page7')">The Dividend Payout Ratio</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page8')">The Balance Sheet</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page9')">The Income Statement</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page10')">The Cash Flow Statement</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page11')">The Price Chart</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page12')">A Stock Purchasing Strategy</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page13')">The Inverted Yield Curve</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page14')">Stock Market Volatility</a>
+                        </li>
+                        <li>
+                            <a href="#" onclick="SetContent('Page15')">Conclusion</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    
+        <!-- Page Content -->
+        <div id="tab-content">
+            <!-- Summary -->
+            <div id="Summary" class="tab-pane fade-in">
+                <iframe src="Summary.html"></iframe>
+            </div>
+            <div id="Page1" class="hidden tab-pane fade">
+                <iframe src="Page1/Page1.html"></iframe>
+            </div>
+            <div id="Page2" class="hidden tab-pane fade">
+                <iframe src="Page2/Page2.html"></iframe>
+            </div>
+            <div id="Page3" class="hidden tab-pane fade">
+                <iframe src="Page3/Page3.html"></iframe>
+            </div>
+            <div id="Page4" class="hidden tab-pane fade">
+                <iframe src="Page4/Page4.html"></iframe>
+            </div>
+            <div id="Page5" class="hidden tab-pane fade">
+                <iframe src="Page5/Page5.html"></iframe>
+            </div>
+            <div id="Page6" class="hidden tab-pane fade">
+                <iframe src="Page6/Page6.html"></iframe>
+            </div>
+            <div id="Page7" class="hidden tab-pane fade">
+                <iframe src="Page7/Page7.html"></iframe>
+            </div>
+            <div id="Page8" class="hidden tab-pane fade">
+                <iframe src="Page8/Page8.html"></iframe>
+            </div>
+            <div id="Page9" class="hidden tab-pane fade">
+                <iframe src="Page9/Page9.html"></iframe>
+            </div>
+            <div id="Page10" class="hidden tab-pane fade">
+                <iframe src="Page10/Page10.html"></iframe>
+            </div>
+            <div id="Page11" class="hidden tab-pane fade">
+                <iframe src="Page11/Page11.html"></iframe>
+            </div>
+            <div id="Page12" class="hidden tab-pane fade">
+                <iframe src="Page12/Page12.html"></iframe>
+            </div>
+            <div id="Page13" class="hidden tab-pane fade">
+                <iframe src="Page13/Page13.html"></iframe>
+            </div>
+            <div id="Page14" class="hidden tab-pane fade">
+                <iframe src="Page14/Page14.html"></iframe>
+            </div>
+            <div id="Page15" class="hidden tab-pane fade">
+                <iframe src="Page15/Page15.html"></iframe>
+            </div>
+        </div>
+    
+    </div>
+
+
+
+
+
+
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="finance.js"></script>
+</body>
+</html>
