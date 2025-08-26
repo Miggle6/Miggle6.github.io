@@ -1,0 +1,167 @@
+<!-- recPred10.html - Recession prediction based on ten inputs:
+     Financial: Yield spread, Credit spread
+     Labor: Sahm gap, Initial jobless claims (YoY)
+     Spending/Sentiment: rPCE (6m ann), Consumer expectations (YoY)
+     Real activity: Building permits (YoY), Industrial production (YoY), New orders (YoY), Real M2 (YoY)
+
+     Run the Python script "recPred10.py" first to generate result10.js.
+     You can compare to: NY Fed yield-curve model; Sahm Rule; Conference Board LEI; private multi-factor models.
+
+    22-Aug-25  M. Watler        Created.
+    23-Aug-25  M. Watler        Retrieve coefficients from a file
+    23-Aug-25  M. Watler        Added a fourth input - building permits.
+    24-Aug-25  M. Watler        Added a fifth input - industrial production.
+    26-Aug-25  M. Watler        Added five more inputs.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Recession Probability — 10-input (Manual)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --fg:#111; --muted:#555; --border:#ddd; --bg:#fff; --codebg:#fafafa; --codebd:#eee;
+      --cardshadow:0 4px 14px rgba(0,0,0,.06);
+    }
+    *{box-sizing:border-box}
+    body{font-family:system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);
+         margin:2rem;line-height:1.45;color:var(--fg)}
+    .card{max-width:980px;border:1px solid var(--border);border-radius:14px;padding:1.25rem;box-shadow:var(--cardshadow)}
+    .muted{color:var(--muted)}
+    .big{font-size:2.2rem;margin:.25rem 0}
+    code{background:var(--codebg);border:1px solid var(--codebd);border-radius:6px;padding:.1rem .35rem}
+    table{border-collapse:collapse;margin-top:.5rem;width:100%}
+    th,td{padding:.4rem .5rem;vertical-align:top;text-align:left;border-bottom:1px solid #eee}
+    th{font-weight:600}
+    .grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+    @media(min-width:980px){.grid{grid-template-columns:1.1fr .9fr}}
+    .pill{display:inline-block;font-size:.85rem;padding:.15rem .5rem;border:1px solid var(--border);
+          border-radius:999px;margin-left:.5rem}
+    pre{background:var(--codebg);border:1px solid var(--codebd);border-radius:10px;padding:.75rem;overflow:auto}
+    .foot{font-size:.9rem;margin-top:.75rem}
+  </style>
+  <script src="result10.js"></script>
+</head>
+<body>
+  <div class="card">
+    <h1 id="title">Recession Probability</h1>
+    <div class="muted">
+      <span id="asof"></span>
+      <span id="mode" class="pill">10-input</span>
+    </div>
+    <div class="big" id="prob">—</div>
+    <div class="muted">P(next 12 months)</div>
+
+    <div class="grid" style="margin-top:1.25rem">
+      <section id="featWrap" style="display:none">
+        <h3>Features</h3>
+        <table id="feat">
+          <thead><tr><th>Indicator</th><th>Value</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="foot muted" id="featNote"></div>
+      </section>
+
+      <section id="contribWrap" style="display:none">
+        <h3>Contributions (logit)</h3>
+        <table id="contribTbl">
+          <thead><tr><th>Term</th><th>Contribution</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <pre id="zline" class="foot"></pre>
+        <div class="foot muted" id="notes"></div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    // Preferred display order for the 10 inputs
+    const ORDER = [
+      "YieldSpread",
+      "CreditSpread_pp",
+      "SahmGap",
+      "InitialClaims_YoY",
+      "rPCE_6mAnn",
+      "BuildingPermits_YoY",
+      "IndustrialProd_YoY",
+      "NewOrders_YoY",
+      "ConsExpect_YoY",
+      "RealM2_YoY"
+    ];
+
+    // Human-friendly labels
+    const LABEL = {
+      YieldSpread: "YieldSpread (10y–3m, pp)",
+      CreditSpread_pp: "CreditSpread (Baa–10y, pp)",
+      SahmGap: "SahmGap (pp above 12m low)",
+      InitialClaims_YoY: "Claims_YoY (%)",
+      rPCE_6mAnn: "rPCE_6mAnn (%)",
+      BuildingPermits_YoY: "BuildingPermits_YoY (%)",
+      IndustrialProd_YoY: "IndustrialProd_YoY (%)",
+      NewOrders_YoY: "NewOrders_YoY (%)",
+      ConsExpect_YoY: "ConsExpect_YoY (%)",
+      RealM2_YoY: "RealM2_YoY (%)"
+    };
+
+    const R = window.recessionResult10 || {};
+    // Header
+    document.getElementById("title").textContent = `Recession Probability — ${R.title || "10-input (Manual)"}`;
+    document.getElementById("asof").textContent  = R.as_of ? `As of: ${R.as_of}` : "";
+    document.getElementById("prob").textContent  = (R.probability_pct!=null)? `${Number(R.probability_pct).toFixed(1)}%` : "—";
+
+    // Features table
+    const featWrap = document.getElementById("featWrap");
+    const featBody = document.querySelector("#feat tbody");
+    if (R.features){
+      const keys = ORDER.filter(k => k in R.features).concat(
+        Object.keys(R.features).filter(k => !ORDER.includes(k))
+      );
+      const rows = keys.map(k => {
+        const v = Number(R.features[k]);
+        return `<tr><td>${LABEL[k]||k}</td><td><code>${isFinite(v)? v.toFixed(3) : R.features[k]}</code></td></tr>`;
+      });
+      featBody.innerHTML = rows.join("");
+      featWrap.style.display = "";
+      document.getElementById("featNote").textContent =
+        "Notes: YoY values are percent vs. 12 months ago; rPCE_6mAnn is 6-month annualized real PCE.";
+    }
+
+    // Contributions table
+    const contribWrap = document.getElementById("contribWrap");
+    const contribBody = document.querySelector("#contribTbl tbody");
+    if (R.contributions){
+      // Keep Intercept and z separate for footer
+      const { Intercept, ...rest } = R.contributions;
+      const keys = ORDER.filter(k => k in rest).concat(Object.keys(rest).filter(k => !ORDER.includes(k)));
+      const rows = keys.map(k => {
+        const v = Number(rest[k]);
+        const sign = v >= 0 ? "+" : "";
+        return `<tr><td>${(k==="CreditSpread"?"CreditSpread_pp":k)
+                .replace("InitialClaims_YoY","Claims_YoY")
+                .replaceAll("_"," ")}</td><td><code>${sign}${v.toFixed(3)}</code></td></tr>`;
+      });
+      // Add intercept
+      if (Intercept != null) {
+        const v = Number(Intercept);
+        rows.push(`<tr><td>Intercept</td><td><code>${v>=0?"+":""}${v.toFixed(3)}</code></td></tr>`);
+      }
+      contribBody.innerHTML = rows.join("");
+      contribWrap.style.display = "";
+      const z = (R.z!=null)? Number(R.z).toFixed(4) : "—";
+      document.getElementById("zline").textContent = `z = ${z}`;
+      // Any free-form notes from the script
+      const noteEl = document.getElementById("notes");
+      if (R.notes){
+        const extra = [];
+        if (R.notes.ISM_New_Orders) extra.push(`• ${R.notes.ISM_New_Orders}`);
+        if (R.notes.Normalization){
+          const n = R.notes.Normalization;
+          extra.push(`• Normalizations: Permits/10, Claims/10, NewOrders/10, ConsExpect/20, RealM2/10`);
+        }
+        noteEl.textContent = extra.join("\n");
+      }
+    }
+  </script>
+</body>
+</html>

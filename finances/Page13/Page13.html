@@ -33,6 +33,24 @@
   <li><b>Building Permits (Leading):</b> Reflects future housing construction activity, usually declining months before broader economic downturns.</li>
   <li><b>Industrial Production (Coincident/Leading):</b> Captures real output of manufacturing, mining, and utilities, often turning negative just as or shortly before a recession begins.</li>
 </ul>
+
+To accurately anticipate a recession, we should add five more leading indicators. They are:
+<ul>
+<li><b>Credit Spreads/Corporate Bond Spreads (Leading)</b>: The difference between yields on corporate bonds (esp. BBB or high-yield) and U.S. 
+  Treasuries of similar maturity. A widening spread signals rising credit risk and tighter financial conditions, often preceding recessions 
+  by several months. The Baa-Treasury spread is a common choice.</li>
+<li><b>Initial Jobless Claims (Leading)</b>: Weekly measure of new unemployment insurance claims. Spikes in claims tend to occur before the unemployment 
+  rate rises, making this a more forward-looking labor market measure. Sharp rises usually precede recessions by 3-6 months.</li>
+<li><b>ISM New Orders Index/Purchasing Managers' Surveys (Leading)</b>: Forward-looking component of the ISM Manufacturing PMI. “New Orders” often 
+  contracts before overall activity, capturing demand shifts before they show up in industrial production or GDP. Below 50 suggests contraction ahead.</li>
+<li><b>Consumer Expectations Index (Leading)</b>: Forward-looking sentiment measure from the University of Michigan or Conference Board surveys. 
+  Consumers often reduce spending in anticipation of tougher times, showing up in expectations before actual PCE slows. A sharp drop in
+  consumer expectations often precedes recessions.</li>
+<li><b>Money Supply Growth, Real M2 / Liquidity Measures (Leading)</b>: Tracks the growth of real money supply (commonly M2, adjusted for inflation). 
+  Historically, contractions or sharp slowdowns in real money supply growth have preceded recessions by 6-12 months. This reflects tighter 
+  credit conditions and reduced liquidity available for spending and investment. In the U.S., real M2 growth turned negative well before the 
+  2001, 2008, and 2020 recessions.</li>
+</ul>
 </p>
 
 <h3>The Inverted Yield Curve (YieldSpread)</h3>
@@ -50,90 +68,6 @@
   <li>Because of the reliability of yield curve inversions as a leading indicator, they tend to receive significant attention in the financial press.</li>
 </ul>
 
-<h3>The Sahm Gap (SahmGap)</h3>
-
-<p>The Sahm Gap measures how much the unemployment rate has risen compared to its recent low. Formally, it is defined as the three-month moving average of 
-  the national unemployment rate minus the minimum value of that same three-month average over the past 12 months.
-In formula form:<br>
-<b>Sahm Gap=U3 unemployment (3-mo avg)-min(U3 unemployment (3-mo avg) in past 12 months)</b>
-</p>
-
-<p>When the Sahm Gap rises <b>by 0.5 percentage points or more</b>, it has historically signaled the start of a recession. For example:<br>
-  If unemployment was at 3.5% (3-mo avg) and rises to 4.0%, the gap is +0.5 pp -> recession signal triggered.
-</p>
-
-<p>Unemployment is a lagging indicator, but increases tend to be sharp and sustained when a recession begins.
-The Sahm Rule doesn't rely on forecasting—it detects recessions quickly in real time (faster than official NBER recession declarations, which can lag by months).
-It's robust across history: it has correctly identified the onset of every U.S. recession since the 1970s without false positives.
-</p>
-
-<p>The Sahm Gap is a real-time early warning system for recessions. If the unemployment rate rises half a percentage point above its 12-month low,
-  history shows that a recession is almost certainly underway.</p>
-
-<h3>Personal Consumption Expenditures (rPCE_6mAnn)</h3>
-
-<p>Personal Consumption Expenditures is the broadest measure of U.S. consumer spending (it covers both goods and services). Consumer spending is ~70% of U.S. GDP.
-When households cut back spending, it directly weakens overall economic output. Slowdowns in consumer expenditures are leading indicators.
-Historically, recessions almost always feature a sharp deceleration in real consumer spending, sometimes outright declines. Consumer spending 
-acts as a short-run pulse check on the health of consumers.
-</p>
-
-<p>Personal Consumption Expenditures tracks the annualized, inflation-adjusted growth in consumer spending over the last 6 months. When this 
-  measure slows sharply or turns negative, it is a strong predictor that a recession is either beginning or already underway, since it directly 
-  reflects weakening consumer demand — the core driver of the U.S. economy.
-</p>
-
-<h3> Building Permits (BuildingPermits_YoY)</h3>
-
-<p>Building Permits are the number of permits issued for new private housing units (single-family and multi-family), tracked monthly by the U.S. Census Bureau.
-The Year-over-Year change is the percentage change compared to the same month one year earlier. It measures the annual growth (or decline) in new housing 
-construction activity:<br>
-<b>BuildingPermits_YoY = 100%x(Permits this month - Permits same month last year)/(Permits last year)</b>
-</p>
-
-<p>Housing is extremely interest-rate sensitive (mortgage costs). When borrowing costs rise or consumer confidence falls, building permits are one 
-  of the first things to decline. A fall in permits means fewer future housing starts which means less demand for construction labor, materials, 
-  appliances, and financing. This cascades across the economy (construction, manufacturing, retail).</p>
-
-<p>Before almost every postwar U.S. recession, BuildingPermits_YoY turned negative. Drops of -10% to -20% year over year have often preceded 
-  recessions by 6-12 months. When BuildingPermits_YoY falls deeply negative, it's usually a sign that:
-<ul>
-<li>Households are stretched by higher rates or weaker income growth.</li>
-<li>Businesses tied to housing anticipate less demand.</li>
-<li>Banks are tightening credit conditions.</li>
-</ul>
-Together, these conditions often spill over into a broader economic contraction.
-</p>
-
-<p>In short, BuildingPermits_YoY is the annual growth rate in new residential building permits. Because housing is a forward-looking, 
-  credit-sensitive sector, sharp declines in this measure often foreshadow recessions. It is considered one of the most reliable leading 
-  indicators for a recession.
-</p>
-
-<h3>Industrial Production (IndustrialProd_YoY)</h3>
-
-<p>Industrial Production is an index published monthly by the Federal Reserve. It measures the real output of manufacturing, mining, and 
-  utilities in the U.S. economy. The Year-over-Year change is the percentage change compared to the same month one year earlier.
-It captures how much U.S. industrial output is growing or shrinking compared with a year ago:<br>
-<b>IndustrialProd_YoY = 100%x(INDPRO(this month) - INDPRO(same month last year))/(INDPRO last year)</b>
-</p>
-
-<p>Factories and heavy industry respond quickly to changes in demand, financing costs, and global trade. When businesses anticipate weaker 
-  demand, they cut production early — making INDPRO one of the first real-economy signals to deteriorate. Industrial production can be more 
-  volatile than GDP (because it excludes services, which are steadier), but those swings make it especially useful for catching early downturns.
- Before almost every U.S. recession since the 1950s, IndustrialProd_YoY turned negative.
-</p>
-
-<p>A negative IndustrialProd_YoY suggests:
-<ul>
-<li>Demand weakness → businesses scale back.</li>
-<li>Tighter credit or higher rates → investment slows.</li>
-<li>Global trade softening → exports fall.</li>
-</ul>
-Because industry is upstream, these declines ripple outward. Less factory output means fewer jobs which means lower incomes and weaker consumption.
-That chain reaction often means a recession is either beginning or imminent.
-</p>
-
 <h3>Probability of a Recession (12 months)</h3>
 
 <p>Recession indicators can be used to determine the probability of a recession over the next twelve months using machine learning 
@@ -146,16 +80,27 @@ That chain reaction often means a recession is either beginning or imminent.
 <li>rPCE_6mAnn: The annual rise/fall of real consumer spending in percentage points over the last 6 months.</li>
 <li>BuildingPermits_YoY: The annual rise/fall in housing permits in percentage points from a year ago.</li>
 <li>IndustrialProd_YoY: The annual rise/fall of industrial production in percentage points from a year ago.</li>
+<li>CreditSpread_pp: The difference in percentage points between Moody’s Baa corporate bond yields and the 10-year Treasury yield.</li>
+<li>Claims_YoY: The year-over-year percentage change in the 4-week average of initial jobless claims.</li>
+<li>NewOrders_YoY: The year-over-year percentage change in manufacturers’ new orders, used as a proxy for ISM New Orders.</li>
+<li>ConsExpect_YoY: The year-over-year percentage change in the consumer expectations index.</li>
+<li>RealM2_YoY: The year-over-year percentage change in the inflation-adjusted M2 money supply.</li>
 </ol>
 </p>
 
 <p>The <b>Contributions</b> to the final probability are simply the product of the features times a weighting factor.  
-  The weights of these features in the model are as follows:<br>
-Yield spread = 2.80<br>
-Sahm Gap = 1.50<br>
-rPCE = 1.20<br>
-Building Permits = 1.00<br>
-Industrial Production = 0.50<br>
+  The weights of these features in the model have been backtested and tuned as follows:<br>
+(Baseline Intercept = -3.0)<br>
+Yield spread = 3.168<br>
+Sahm Gap = 1.80<br>
+rPCE = 1.00<br>
+Building Permits = 1.20<br>
+Industrial Production = 0.96<br>
+Credit Spread = 0.60<br>
+Initial Jobless Claims = 1.40<br>
+Manufacturer's New Orders = 1.40<br>
+Consumer Expectation  = 0.80<br>
+M2 Money Supply = 1.20<br>
 </p>
 
 <p>If <b>z</b> is the sum of the contributions, also called the <b>log-odds</b>, the model converts <b>log-odds (z)</b>
@@ -164,9 +109,7 @@ Industrial Production = 0.50<br>
 </p>
 
 
-<p>Click on any of the charts below:<br>
-<a href="recPred3.html" target="_blank">Recession Probability - 3 Input</a> (yield spread, unemployment, consumer spending).<br>
-<a href="recPred4.html" target="_blank">Recession Probability - 4 Input</a> (yield spread, unemployment, consumer spending, building permits).<br>
-<a href="recPred5.html" target="_blank">Recession Probability - 5 Input</a> (yield spread, unemployment, consumer spending, building permits, industrial production).
+<p>Click on the chart below for the probability of a recession:<br>
+<a href="recPred10.html" target="_blank">Recession Probability - 10 Inputs</a>.
 </p>
 
